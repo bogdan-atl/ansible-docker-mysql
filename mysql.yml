@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+
+
+  tasks:
+    - name: Install mysql
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: ['mysql-server'] 
+
+    - name: start and enable mysql service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
